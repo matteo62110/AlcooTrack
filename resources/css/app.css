@@ -1,0 +1,222 @@
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary: #64748b;
+    --danger: #ef4444;
+    --warning: #f97316;
+    --success: #22c55e;
+    --background: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --radius: 8px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+#app {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+header {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: var(--text-light);
+}
+
+main {
+    background-color: var(--card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+h1, h2, h3 {
+    margin-bottom: 1rem;
+}
+
+form div {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input[type="number"],
+input[type="text"],
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: white;
+    transition: border-color 0.15s ease;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Styles pour la page de consommation */
+.boisson-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: white;
+}
+
+.boisson-info h3 {
+    margin-bottom: 0.25rem;
+}
+
+.boisson-info p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.boisson-counter {
+    display: flex;
+    align-items: center;
+}
+
+.boisson-counter button {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.boisson-counter span {
+    margin: 0 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+}
+
+/* Panneau d'information utilisateur */
+.user-info {
+    background-color: #f1f5f9;
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Résultats d'alcoolémie */
+.alcoolemie-result {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background-color: #f1f5f9;
+}
+
+.alcoolemie-result p:first-of-type {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Classes pour les messages selon le niveau d'alcool */
+.message-safe {
+    color: var(--success);
+}
+
+.message-warning {
+    color: var(--warning);
+}
+
+.message-danger {
+    color: var(--danger);
+}
+
+/* Radio buttons styling */
+.radio-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.radio-label input {
+    margin-right: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    main {
+        padding: 1.5rem;
+    }
+
+    .boisson-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .boisson-counter {
+        margin-top: 1rem;
+        align-self: flex-end;
+    }
+}
