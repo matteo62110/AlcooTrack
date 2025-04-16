@@ -24,10 +24,25 @@ export const useUserStore = defineStore('user', () => {
 
     // Synchroniser avec le serveur
     async function syncSettings() {
-        // Dans une vraie application, vous appelleriez votre API ici
         if (authStore.isAuthenticated) {
             console.log('Synchronisation des paramètres avec le serveur');
-            // await fetch('/api/user/settings', {...})
+            // Exemple d'appel API (à adapter selon votre backend)
+            // await fetch('/api/user/settings', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ poids: poids.value, sexe: sexe.value })
+            // });
+        }
+    }
+
+    // Charger les paramètres utilisateur depuis le serveur
+    async function chargerParametresUtilisateur() {
+        if (authStore.isAuthenticated) {
+            console.log('Chargement des paramètres utilisateur depuis le serveur');
+            // Exemple d'appel API (à adapter selon votre backend)
+            // const response = await fetch('/api/user/settings');
+            // const data = await response.json();
+            // updateSettings(data);
         }
     }
 
@@ -35,6 +50,7 @@ export const useUserStore = defineStore('user', () => {
         poids,
         sexe,
         updateSettings,
-        syncSettings
+        syncSettings,
+        chargerParametresUtilisateur
     };
 });

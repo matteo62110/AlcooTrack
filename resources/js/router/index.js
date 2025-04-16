@@ -5,6 +5,8 @@ import { useAuthStore } from '../stores/authStore';
 import Dashboard from '../components/connexion/Dashboard.vue';
 import ConsumptionPage from '../components/ConsumptionPage.vue';
 import NotFound from '../components/connexion/NotFound.vue';
+import Minuteur from '../components/consommation/MinuteurConsommation.vue';
+
 
 // Pages d'authentification
 import Connexion from '../components/connexion/Connexion.vue';
@@ -21,6 +23,11 @@ const routes = [
         name: 'Consumption',
         component: ConsumptionPage,
         meta: { requiresAuth: true }
+    },
+    {
+        path: '/minuteur',
+        name: 'Minuteur',
+        component: Minuteur
     },
     {
         path: '/login',

@@ -6,6 +6,7 @@
         <div class="nav-links">
             <router-link to="/">Accueil</router-link>
             <router-link v-if="isAuthenticated" to="/consumption">Consommation</router-link>
+            <router-link v-if="isAuthenticated" to="/minuteur">Minuteur</router-link>
         </div>
         <div class="auth-links">
             <template v-if="isAuthenticated">

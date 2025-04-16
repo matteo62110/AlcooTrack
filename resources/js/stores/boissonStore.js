@@ -77,6 +77,10 @@ export const useBoissonStore = defineStore('boisson', () => {
         }, 0).toFixed(2);
     });
 
+    function chargerDonneesUtilisateur() {
+        console.log('Chargement des données utilisateur depuis le store local');
+    }
+
     // Fonction pour ajouter une boisson personnalisée
     function ajouterBoissonPerso(boisson) {
         const maxId = boissons.value.reduce((max, b) => Math.max(max, b.id), 0);
@@ -218,5 +222,7 @@ export const useBoissonStore = defineStore('boisson', () => {
         sauvegarderSession,
         supprimerSession,
         setMinuteurRef,
+        minuteurRef,
+        chargerDonneesUtilisateur,
     };
 });
