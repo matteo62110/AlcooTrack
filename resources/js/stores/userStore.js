@@ -1,56 +1,36 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { useAuthStore } from './authStore';
 
 export const useUserStore = defineStore('user', () => {
-    const authStore = useAuthStore();
-
-    // Récupérer depuis localStorage ou utiliser des valeurs par défaut
-    const poids = ref(parseInt(localStorage.getItem('userPoids')) || 70);
+    const nom = ref(localStorage.getItem('userNom') || '');
+    const poids = ref(parseInt(localStorage.getItem('userPoids') || '70'));
     const sexe = ref(localStorage.getItem('userSexe') || 'homme');
 
-    // Mise à jour des paramètres
+    function sauvegarderUtilisateur(userData) {
+        console.log('Sauvegarde utilisateur:', userData);
+        if (userData.name) {
+            nom.value = userData.name;
+            localStorage.setItem('userNom', userData.name);
+        }
+    }
+
     function updateSettings(settings) {
         if (settings.poids) {
             poids.value = settings.poids;
-            localStorage.setItem('userPoids', poids.value.toString());
+            localStorage.setItem('userPoids', settings.poids);
         }
 
         if (settings.sexe) {
             sexe.value = settings.sexe;
-            localStorage.setItem('userSexe', sexe.value);
-        }
-    }
-
-    // Synchroniser avec le serveur
-    async function syncSettings() {
-        if (authStore.isAuthenticated) {
-            console.log('Synchronisation des paramètres avec le serveur');
-            // Exemple d'appel API (à adapter selon votre backend)
-            // await fetch('/api/user/settings', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ poids: poids.value, sexe: sexe.value })
-            // });
-        }
-    }
-
-    // Charger les paramètres utilisateur depuis le serveur
-    async function chargerParametresUtilisateur() {
-        if (authStore.isAuthenticated) {
-            console.log('Chargement des paramètres utilisateur depuis le serveur');
-            // Exemple d'appel API (à adapter selon votre backend)
-            // const response = await fetch('/api/user/settings');
-            // const data = await response.json();
-            // updateSettings(data);
+            localStorage.setItem('userSexe', settings.sexe);
         }
     }
 
     return {
+        nom,
         poids,
         sexe,
-        updateSettings,
-        syncSettings,
-        chargerParametresUtilisateur
+        sauvegarderUtilisateur,
+        updateSettings
     };
 });

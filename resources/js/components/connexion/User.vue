@@ -3,15 +3,6 @@
         <h2>Mon Profil</h2>
 
         <div class="profile-card">
-            <div class="profile-header">
-                <div class="avatar">{{ initiales }}</div>
-                <div class="user-info">
-                    <h3>{{ authStore.user?.name }}</h3>
-                    <p>{{ authStore.user?.email }}</p>
-                </div>
-                <button @click="logout" class="logout-btn">Déconnexion</button>
-            </div>
-
             <div class="stats-panel">
                 <h4>Mes Statistiques</h4>
                 <div class="stats-grid">
@@ -90,16 +81,6 @@ const settings = ref({
     sexe: userStore.sexe
 });
 
-// Initiales de l'utilisateur pour l'avatar
-const initiales = computed(() => {
-    if (!authStore.user?.name) return '?';
-    return authStore.user.name
-        .split(' ')
-        .map(n => n[0])
-        .join('')
-        .toUpperCase();
-});
-
 // Statistiques basées sur l'historique de l'utilisateur connecté
 const totalSessions = computed(() => boissonStore.historique.length);
 const totalConsommations = computed(() =>
@@ -109,7 +90,8 @@ const totalConsommations = computed(() =>
 
 // Pour le compteur d'eau, récupérer les données spécifiques à l'utilisateur
 const totalEau = computed(() => {
-    const prefix = authStore.isAuthenticated ? `user_${authStore.user.id}_` : 'guest_';
+    const prefix = authStore.isInitialized.value ?
+        `user_${localStorage.getItem('userId') || 'default'}_` : 'guest_';
     const savedState = localStorage.getItem(`${prefix}minuteurConsommation`);
     return savedState ? JSON.parse(savedState).waterCount || 0 : 0;
 });
@@ -139,27 +121,15 @@ function saveSettings() {
     }, 3000);
 }
 
-function logout() {
-    authStore.logout();
-    router.push('/login');
-}
-
 // S'assurer que les données sont chargées correctement
 onMounted(() => {
-    if (!authStore.isAuthenticated) {
-        router.push('/login');
-        return;
-    }
+    console.log('Montage du composant User');
 
-    // Forcer le rechargement des données de l'utilisateur
-    userStore.chargerParametresUtilisateur();
-    boissonStore.chargerDonneesUtilisateur();
-
-    // Synchroniser les valeurs du formulaire avec celles du store
     settings.value.poids = userStore.poids;
     settings.value.sexe = userStore.sexe;
 });
 </script>
+
 <style scoped>
 .profile-container {
     max-width: 800px;

@@ -5,17 +5,10 @@
             <p class="subtitle">Votre compagnon pour une consommation responsable</p>
         </div>
 
-        <div v-if="authStore.isAuthenticated" class="welcome-user">
-            <h2>Bonjour, {{ authStore.user.name }}</h2>
+        <div class="welcome-user">
+            <h2>Bienvenue sur l'application</h2>
             <router-link to="/consumption" class="btn-primary">
                 Accéder à mon suivi
-            </router-link>
-        </div>
-
-        <div v-else class="auth-cta">
-            <p>Connectez-vous pour accéder à toutes les fonctionnalités</p>
-            <router-link to="/login" class="btn-primary">
-                Se connecter
             </router-link>
         </div>
 
